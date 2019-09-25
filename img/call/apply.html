@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Xian (color, num) {
+			this.xianColor = color;
+			this.xianNum = num;
+		}
+
+		function Muban (mubancolor, size) {
+			this.mubanColor = mubancolor;
+			this.size = size;
+		}
+		function Guitar (color, num, mubancolor, size) {
+			Xian.call(this, color, num);
+			Muban.call(this, mubancolor, size);
+		}
+		var guitar = new Guitar('red', 6, '褐色', 42);
+
+	</script>
+
+</body>
+</html>

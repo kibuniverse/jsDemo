@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>计数器</title>
+	<style type="text/css">
+		input{
+			width: 200px;
+			height: 20px;
+			border: 2px solid #e0e0e0;
+			text-align: right;
+		}
+	</style>
+</head>
+<body>
+	mintues:<input type="text" name="" value="0">
+	seconds:<input type="text" name="" value="0">
+	<button>开始</button>
+	<script type="text/javascript">
+		var mintuesNode = document.getElementsByTagName('input')[0];
+		var secondsNode = document.getElementsByTagName('input')[1];
+		var button = document.getElementsByTagName('button');
+		var mintues = 0,
+			seconds = 0;
+
+
+        button[0].onclick = function () {
+        	var timer = setInterval(function(){
+				seconds ++;
+				if(seconds == 60){
+					seconds = 0;
+					mintues ++;
+				}
+				if(mintues == 3){
+					clearInterval(timer);
+				}
+				mintuesNode.value = mintues;
+				secondsNode.value = seconds;
+
+			}, 100);
+        }
+		
+ 	</script>
+
+</body>
+</html>

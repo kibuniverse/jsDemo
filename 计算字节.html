@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		function renBytesLen(target) {
+			// body...
+			var length = target.length,
+				count = length;
+			for(var i = 0; i < length; i++){
+				if(target.charCodeAt(i) > 255){
+					count++;
+				}
+			}
+			console.log(count);
+		}
+	</script>
+
+</body>
+</html>

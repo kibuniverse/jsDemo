@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>移动格子</title>
+
+	<style>
+		div{
+			-webkit-animation: change ;
+		}
+		.a{
+			border: 2px solid black;
+		}
+		.b{
+			transform: rotate(40deg);
+			background-color: blue;
+		}
+		.c{
+			-webkit-transform: skew(30deg);
+			background-color: red;
+		}	
+		.d{
+			-webkit-transform: skew(0, 40deg);
+			background-color: #ede2e2;
+		}
+		.e{
+			0%   {background: red;}
+		    25%  {background: yellow;}
+		 	50%  {background: blue;}
+		    75%  {background: green;}
+		    100% {background: red;}
+			background-color: #81c0c0;
+		}
+		.f{
+			background-color: #ae57a4;
+		}
+		.g{
+			background-color: #e8e8d0;
+		}
+	</style>
+</head>
+<body>
+	<div class="a"></div>
+	<div class="b"></div>
+	<div class="c"></div>
+	<div class="d"></div>
+	<div class="e"></div>
+	<div class="f"></div>
+	<div class="g"></div>
+	<script type="text/javascript">
+		var div = document.getElementsByTagName('div');
+		// 事件委托
+
+		for(let i = 0;i<div.length;i++){
+			div[i].style.width = "100px";
+			div[i].style.height = "100px";
+			div[i].style.position = "absolute";
+			div[i].style.left = "0";
+			div[i].style.top = "0";
+			// div[i].style.backgroundColor = "skyblue";
+
+			div[i].onclick = function () {
+	        	document.onkeydown = function (e){
+	        		console.log('1');
+					switch (e.which) {
+						case 37:
+							div[i].style.left = parseInt(div[i].style.left) - 7 +"px";
+							break;
+						case 38:
+							div[i].style.top = parseInt(div[i].style.top) - 7 +"px";
+							break;
+						case 39:
+						    div[i].style.left = parseInt(div[i].style.left) + 7 +"px";
+							break;
+						case 40:
+							div[i].style.top = parseInt(div[i].style.top) + 7 +"px";
+							break;
+					}
+				}	
+        	}
+		}
+       
+		
+	</script>
+
+</body>
+</html>

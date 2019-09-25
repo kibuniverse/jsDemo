@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Father(argument) {
+			var n = 0;
+			function Son() {
+				n++;
+				debugger;
+				console.log(n);
+			} 
+			return Son;
+		}
+		var result = new Father();
+		result();
+	</script>
+
+</body>
+</html>

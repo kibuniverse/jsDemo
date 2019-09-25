@@ -1,0 +1,81 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.button{
+			width: 80px;
+			height: 30px;
+			background-color: #53FF53;
+			border:none;
+			margin-left: 100px;
+			border-radius: 10px;
+			outline: none;
+		}
+		p{
+			margin-left: 400px;
+		}
+	</style>
+</head>
+<body>
+	<div style="width: 300px; height: 300px; background-color: skyblue;margin: 0 auto;"></div>   <!-- 需要修改的框 -->
+	<p>
+		<button class="button">变高</button>
+		<button class="button">变宽</button>
+		<button class="button">变色</button>
+		<button class="button">隐藏</button>
+		<button class="button">重置</button>
+	</p>
+	
+	<script type="text/javascript">
+		var button = document.getElementsByTagName('button');  //类数组
+		var length = button.length;
+		var div = document.getElementsByTagName('div')[0];
+		function changeHeight() {
+			console.log('a');
+			div.style.height = parseInt(div.style.height) + 10 + 'px';
+		}
+		function changeWidth() {
+			div.style.width  = parseInt(div.style.width) + 10 + 'px';
+		}
+		function changeColor() {
+			div.style.backgroundColor = 'rgb('+Math.round(Math.random()*255)+', '+Math.round(Math.random()*255)+', '+Math.round(Math.random()*255)+')';
+		}
+		function hidden() {
+			div.style.opacity = 0;
+		}
+		function reset() {
+			div.style.opacity = 1;
+			div.style.width = '300px';
+			div.style.height = '300px';
+			div.style.backgroundColor = 'skyblue';
+		}
+		function init() {
+			for (var i = 0; i < length; i++) {
+				(function(j){
+					button[j].addEventListener('click', function() {
+						switch(j){
+							case 0:
+								changeHeight();
+								break;
+							case 1:
+								changeWidth();
+								break;
+							case 2:
+								changeColor();
+								break;
+							case 3:
+								hidden();
+								break;
+							case 4:
+								reset();
+								break;
+						}
+					}, false);
+				}(i));
+			}
+		}
+		init();
+	</script>
+</body>
+</html>

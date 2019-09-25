@@ -1,0 +1,47 @@
+<!-- （1）跑马灯效果 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <input type="button" value="run" id="btn1" @click="lang">
+    <input type="button" value="stop" id="btn2" @click="stop">
+    <br>
+    <h4>{{msg}}</h4>
+</div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script>
+       var wm = new Vue({
+           el:"#div1",
+           data:{
+                msg:"西安邮电大学！",
+               intervalId: null
+           },
+           methods: {
+               lang() {
+                   if (this.intervalId != null) return;
+                   this.intervalId = setInterval(() => {
+                       var start = this.msg.substring(0, 1);
+                       var end = this.msg.substring(1);
+                       this.msg = end + start;
+                   }, 400)
+               },
+               stop(){
+                   clearInterval(this.intervalId);
+                   this.intervalId = null;
+               }
+           }
+           }
+ 
+       )
+    </script>
+</body>
+</html>

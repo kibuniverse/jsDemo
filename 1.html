@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+	<script type="text/javascript">
+		// var data=[] 
+		// for(var i = 0; i < 2; i++){
+		// 	data[i]=function(){
+		// 		console.log(i)
+		// 	}
+		// }		
+		// data[0]()
+		// data[1]()
+		function fun(n,o) {
+			console.log(o);
+			return {
+				fun : function(m){
+					return fun(m, n);
+				}
+			}
+		}
+		var a = fun(0).fun(1).fun(2).fun(3);
+		var b = fun(0).fun(1)
+		b.fun(2)
+		b.fun(3)
+	</script>
+</body>
+</html>

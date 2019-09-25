@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>setInterval</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="demo" style="width: 100px;
+	height: 100px;background-color: blue;position: absolute; left: 0px; right: 0px;"></div>
+	<p style="width: 100px;height: 100px;background-color: red;"></p>
+	<script type="text/javascript">
+		var div = document.getElementsByTagName('div')[0];
+		var p = document.getElementsByTagName('p')[0];
+		var speed = 1000;
+		p.onclick = function () {
+			clearInterval(timer1);
+			speed += 1000;
+			var timer1 = setInterval(function () {
+				// body...
+				console.log(speed);
+				div.style.left = parseInt(div.style.left) + 20 + 'px';
+			}, speed);
+		}
+		var timer1 = setInterval(function () {
+			// body...
+			console.log(speed);
+			div.style.left = parseInt(div.style.left) + 20 + 'px';
+		}, speed);
+	</script>
+
+</body>
+</html>

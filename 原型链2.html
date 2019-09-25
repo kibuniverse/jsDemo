@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+	<script type="text/javascript">
+		function Father() {
+			this.a = 10;
+			this.b = 10;
+		}
+		var father = new Father();
+		function Son() {
+			this.c = 20;
+		}
+		Son.prototype = new Father();
+
+		var son = new Son();
+		Son.prototype.a = 20;
+		var son2 = new Son();
+	</script>
+</body>
+</html>

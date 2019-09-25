@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		div {
+			width: 100px;
+			height: 100px;
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="tag"></div>
+	<script type="text/javascript">
+		var tag = document.getElementById('tag');
+		var time = null;
+		function a(argument) {
+			// body...
+			console.log('a');
+		}
+		tag.addEventListener('mousemove', function (argument) {
+			if (time) {
+				clearTimeout(time);
+			}
+			time = setTimeout(a, 300);
+		}, false);
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>圆形链继承的问题</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Father() {
+		}
+		Father.prototype.Name = 'abc';
+		function Son() {
+		}
+		Son.prototype = new Father();
+		var son1 = new Son();
+		var son2 = new Son();
+	</script>
+</body>
+</html>

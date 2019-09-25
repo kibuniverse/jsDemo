@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html tang="en">
+<head>
+	<meta charset="utf-8">
+	<title>document</title>
+</head>
+<body>
+	<!-- <div id="Zzz" class="zzz"></div>
+	<div class="demo"></div> <div></div>
+	<div class="demo"></div> -->
+	<div>
+		<div>
+			<p>
+				<strong>
+					<p>
+						<data>
+							<em></em>
+							
+						</data>
+					</p>
+				</strong>
+			</p>
+		</div>
+		
+	</div>
+	<img src="img/travel3.jpg">
+	<script type="text/javascript">
+		/*var div = document.getElementByClassName('demo');
+		alert(div.tagName);
+		for(var propName in 50){
+			document.write(propName);
+		}*/
+		/*var num = 0;
+        for (var i = 1; i < 10; i++) {
+        	if (i % 5 == 0){
+        		continue;
+        	}
+        	num++;
+        }
+        alert(num);*/
+        /* */
+        /*var div = document.querySelector('div');
+        var demo = document.getElementsByClassName('demo')[0];*/
+        // var div = document.getElementsByTagName('div');
+  /*      var div = document.getElementsByTagName('div')[0];*/
+       /* var demo = document.getElementsByClassName('demo')[0];*/
+       var Node = document.getElementsByTagName('em')[0];
+       function retCountNfatherNode(Node) {
+           var n = 6;  
+	       for (var i = 0; i < n; i++) {
+	  			document.write(Node.tagName);
+	  			console.log(Node.tagName);
+	       	    Node.tagName = Node.parentElement;  
+	       }
+	       return Node;
+       }
+       Node = retCountNfatherNode.tagName(Node);
+       document.write(Node.tagName);
+	       
+	</script>
+
+</body>
+</html>

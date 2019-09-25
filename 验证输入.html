@@ -1,0 +1,71 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>验证输入</title>
+</head>
+<body>
+	用户名: <input type="" name="" id="userName">
+	电话号码: <input type="" name="" id="userNum">
+	<button>提交</button>
+	<script type="text/javascript">
+		var btn = document.getElementsByTagName('button')[0];
+		btn.addEventListener('click', function () {
+			 //将string类型转换为number类型
+			var userName = parseInt(document.getElementById('userName').value); 
+			var userNum = parseInt(document.getElementById('userNum').value);
+			console.log(typeof userName);
+			console.log(userName);
+			alert('a');
+			if(userNum < 100000 && userNum > 999999){
+				alert('input false');
+			}
+		}, false);
+	</script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <title>
+        无标题文档
+    </title>
+</head>
+<body>
+    用户名（3到6位字母数字的组合）：
+    <input id="username" type="text" οnblur="userJudge()"/>
+    <br/>
+    电话号码(6位数字):
+    <input id="tel" type="text" value="" οnblur="telJudge()"/>
+    <br/>
+    <button>提交</button>
+</body>
+<script>
+	var btn = document.getElementsByTagName('button')[0];
+	btn.onclick = function () {
+		userJudge();
+		telJudge();
+	}
+    function userJudge(){
+		var userN = document.getElementById("username");
+		var regs = /^[a-zA-Z0-9]{3,6}$/;
+		var reg = new RegExp(regs);	
+		var result = reg.test(userN.value);
+		if(result){
+			alert('录入正确');
+		}else{
+			alert('录入错误')	
+		}
+	}
+	function telJudge(){
+		var phone = document.getElementById("tel");
+		var regs = /^[0-9]{6}$/;
+		var reg = new RegExp(regs);	
+		var result = reg.test(phone.value);
+		if(result){
+			alert('录入正确');
+		}else{
+			alert('录入错误')	
+		}
+	}
+</script>

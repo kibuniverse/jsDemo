@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		var obj = {
+			name : 'kasa',
+			age : "",
+			way : function() {
+				console.log('b');
+			},
+			sex : undefined,
+			toJSON : function() {
+				return this.name;
+			}
+		};
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.src = 'demo.js';
+		script.onload = function() {
+			text();
+		}
+		document.head.appendChild(script);
+	</script>
+
+</body>
+</html>

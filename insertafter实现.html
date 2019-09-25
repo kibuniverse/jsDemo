@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        C
+        <title>
+            insertafter
+        </title>
+    </head>
+    <body>
+        <div>
+            <b>
+            </b>
+            <span>
+            </span>
+            <p>
+            </p>
+            <em>
+            </em>
+            div = new Data();
+        </div>
+        <script type="text/javascript">
+        Element.prototype.insertAfter = function (targetNode, afterNode) {
+			var beforeNode = afterNodeNode.nextElementSibling;
+			
+				if(beforeNode == null){
+					this.appendChild(targetNode);
+				}else{
+					this.insertBefore(targetNode, beforeNode);
+				}
+		}
+	 	var div = document.getElementsByTagName('div')[0];
+	 	var span = document.getElementsByTagName('span')[0];
+	 	var p = document.getElementsByTagName('p')[0];
+	 	var h1 = document.createElement('h1');
+	 	var em = document.getElementsByTagName('em')[0];
+        </script>
+    </body>
+</html>

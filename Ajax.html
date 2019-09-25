@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		// var script = document.createElement('script');
+		// script.src = 'http://v.juhe.cn/weather/index?cityname=%e8%a5%bf%e5%ae%89&key=1409e6ca7d7d48c6d08dfb6011e9a9bb&callback=data';
+		// document.body.insertBefore(script, document.body.firstChild);
+		// function data(res){
+		// 	window.localStorage.setItem('applyParams', JSON.stringify(res));
+		// 	console.log(res);
+		// 	console.log(res.result.today);
+		// }
+		var Data = JSON.parse(window.localStorage.getItem('applyParams'));
+		console.log(Data);
+		console.log(typeof Data.result.today);
+	</script>
+</body>
+</html> 

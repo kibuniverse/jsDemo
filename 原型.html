@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            原型
+        </title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            Father.prototype.name = 'xiaoming';
+				function Father() {
+				}
+				var father = new Father();
+				// Son.prototype = Father;
+
+				function Son() {
+
+				}
+			
+				var son = new Son();
+				// inherit(son.constuctor, F);
+				inherit(Son, Father);
+				var son2 = new Son();
+
+				//共享原型函数封装
+				// function inherit(Target, Origin) {
+				// 	Target.prototype = Origin.prototype;
+				// }
+				//圣杯模式1
+				// function inherit (Target, Origin) {
+				// 	function F() {};
+				// 	F.prototype = Origin.prototype;
+				// 	Target.prototype = new F();
+				// 	Target.prototype.constuctor = Target;
+				// 	Target.prototype.uber = Origin.prototype;
+				// }
+
+				// 圣杯模式2
+				
+				var inherit = (function () {
+					var F = function() {}; //私有变量
+					return function(Target, Origin){
+						F.prototype = Origin.prototype;
+						Target.prototype = new F();
+						Target.prototype.constuctor = Target;
+						Target.prototype.uber = Origin.prototype;
+					}
+				}());
+
+				// function F() {
+				// 	var name = 'kasa';
+				// }
+
+				// var f = new F();
+        </script>
+    </body>
+</html>

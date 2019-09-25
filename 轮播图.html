@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>轮播图</title>
+	<link rel="stylesheet" type="text/css" href="css/轮播图.css">
+</head>
+<body>
+	<div id ="box">
+		<button id ="left"><</button>
+		<button id ="right">></button>
+		<ul id="imgs">
+			<img class="zzz" id="" src="img/1.jpg" alt="">
+			<img class="zzz" id="" src="img/6.jpg" alt="">
+			<img class="zzz" id="" src="img/5.jpg" alt="">
+			<img class="zzz" id="" src="img/4.jpg" alt="">
+			<img class="zzz" id="" src="img/3.jpg" alt="">
+			<img class="zzz" id="" src="img/2.jpg" alt="">
+			<img class="zzz" id="" src="img/1.jpg" alt="">
+			<img class="zzz" id="" src="img/6.jpg" alt="">
+	    </ul>
+	    <div class="top" unselectable="on"; 
+	onselectstart="return false;">回到首页</div>
+	    <div id="subscript">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+	<div id = "box2">
+		<span>speed</span>
+		<div id="speedPlus">+</div>
+ 	    <div id="speedReduce">-</div>
+	</div>
+	<script type="text/javascript">
+		var btnleft = document.getElementById('left');
+		var btnright = document.getElementById('right');
+		var box = document.getElementById('box');
+		var imgs = document.getElementById('imgs');     //列表
+		var imgnumber = document.getElementsByClassName('zzz').length - 2;
+		var bactop = document.getElementsByClassName('top')[0];
+		var speedPlus = document.getElementById('speedPlus');
+		var speedReduce = document.getElementById('speedReduce');
+		var timer1 = null, timer2 = null, timer3 = null, timer4 = null, timer5 = null;
+		var index = 0, distant = 0, step = 0, flag1 = 0;
+		var subscript = document.getElementById('subscript');
+		var dots = subscript.getElementsByTagName('div');
+		var dotsnum = dots.length;
+		console.log(dotsnum);	
+		imgs.style.left = '-600px';          //让第一张照片显示
+		var swspeed = 3000;
+		dots[index].style.backgroundColor = '#00e3e3';
+		function pageSlide(flag) {
+			if(!timer2 && !timer3 && !timer4 && !timer5){
+				step = flag === 1 ? -2 : 2;
+				timer2 = setInterval(function () {
+					distant += Math.abs(step);     //记录移动的距离
+					imgs.style.left = (parseInt(imgs.style.left) + step) + 'px';
+					if(distant >= 600){
+						clearInterval(timer2);
+						distant = 0;						
+						timer2 = null;
+						dots[index].style.backgroundColor = '#caffff';
+						if(step > 0){            //照片向左走 ， index --
+							index--;
+						}else{
+							index++;
+						}
+						// console.log(index);
+						if(index == 6){
+							index = 0;
+							imgs.style.left = '-600px';
+						}
+						if(index == -1){
+							index = 5;
+							imgs.style.left = '-3600px';
+						}
+						dots[index].style.backgroundColor = '#00e3e3';
+					}
+			    }, 2);
+			}
+		}
+		timer1 = setTimeout(startSlibe, swspeed);
+		
+		box.addEventListener('mouseenter', function () {
+			console.log('enter');
+			flag1 = 1;
+			clearTimeout(timer1);
+		}, false);
+
+		function startSlibe () {
+			if(flag1 == 1){
+				clearTimeout(timer1);
+				return;
+			}
+			console.log('start');
+			console.log(swspeed);
+			pageSlide(1);
+			setTimeout(startSlibe, swspeed);
+		}
+		
+
+		box.addEventListener('mouseleave', function () {
+			console.log('leave');
+			flag1 = 0;
+			timer1 = setTimeout(startSlibe, swspeed);
+		}, false);
+		
+		bactop.addEventListener('click', function () {
+			if(!timer2 && !timer3 && index && !timer4 && !timer5){   //动画在滑动的过程中不会回到首页
+				dots[index].style.backgroundColor = '#caffff';
+				dots[0].style.backgroundColor = '#00e3e3'
+				console.log(index);
+				clearTimeout(timer1);
+				distant = index * 600;
+				timer3 = setInterval(function () {
+					clearTimeout(timer1);
+					imgs.style.left = parseInt(imgs.style.left) + 2 + 'px'; 
+					distant -= 2;
+					console.log(index);
+					if(distant == 0){
+						clearInterval(timer3);
+						timer3 = null;
+						index = 0;
+					}
+				}, 1);
+ 			}
+		}, false);
+
+		speedPlus.addEventListener('click', function () {
+			if(!timer3){
+				console.log(swspeed);
+				if(swspeed<2000){
+					return;
+				}
+				swspeed -= 100;
+			}
+		}, false);
+		speedReduce.addEventListener('click', function () {
+			if(!timer3){
+				console.log(swspeed);
+				if(swspeed>4000){
+					return;
+				}
+				swspeed += 100;
+			}
+		}, false);
+		for (var i = 0 ; i < dotsnum; i++) {
+			(function (j) {
+				dots[j].onclick = function () {
+
+					if(!timer2 && !timer3 && j != index && !timer4 && !timer5){
+						dots[index].style.backgroundColor = '#caffff';
+						dots[j].style.backgroundColor = '#00e3e3';
+						console.log('click');
+						if (index > j) {
+							step = 2;
+						}else{
+							step = -2; //判断往哪边走
+						}
+						distant = Math.abs((index - j) * 600);
+						console.log(distant);
+						timer4 = setInterval(function () {
+							distant -= 2;
+							imgs.style.left = parseInt(imgs.style.left) + step + 'px';
+							if (distant == 0) {
+								clearInterval(timer4);
+								timer4 = null;
+								index = j;
+							}
+						}, 2);	
+					}		
+				}	
+			}(i));
+		}
+		btnleft.addEventListener('click', function () {
+			if(distant && !timer3 && !timer4){
+				clearInterval(timer1);
+				clearInterval(timer2);
+				timer2 = null;
+				timer5 = setInterval(function () {
+					distant--;
+					imgs.style.left = parseInt(imgs.style.left) + 1 + 'px';
+					console.log(imgs.style.left);
+					if(distant == 0){
+						clearInterval(timer5);
+						timer5 = null;
+						return;
+					}
+				}, 2);
+			}else{
+				pageSlide(2);
+			}
+		}, false);
+		btnright.addEventListener('click', function () {
+			if(distant && !timer3 && !timer4){
+				clearInterval(timer1);
+				clearInterval(timer2);
+				timer2 = null;
+				timer5 = setInterval(function () {
+					distant--;
+					imgs.style.left = parseInt(imgs.style.left) - 1 + 'px';
+					console.log(imgs.style.left);
+					if(distant == 0){
+						clearInterval(timer5);
+						timer5 = null;
+						return;
+					}
+				}, 2);
+			}else{
+				pageSlide(1);
+			}
+		}, false);
+	</script>
+</body>
+</html>

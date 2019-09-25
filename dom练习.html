@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            dom练习
+        </title>
+        <style type="text/css">
+            ul{
+			list-style: none;
+		}
+		.demo{
+			width: 100px;
+			height: 100px;
+			background-color: skyblue;
+		}
+        </style>
+    </head>
+    <body>
+        <!-- <div style="width: 100px; height: 100px; background-color: skyblue;"></div> -->
+        <!-- <ul>
+		<li>a</li>
+		<li>a</li>
+		<li>a</li>
+		<li>a</li>
+	</ul> -->
+        <div class="demo">
+        </div>
+        <p type="button"></p>
+        <script type="text/javascript">
+            /*var div = document.createElement('div');
+		var p = document.createElement('p');
+		var text = document.createTextNode('demo');
+		p.HTMLinner = 'what are you looking for';
+		div.setAttribute('class', 'exam');
+		p.setAttribute('id', 'only');
+		document.body.appendChild(div);
+		div.appendChild(p); 
+		p.appendChild(text)*/
+		/*var div	 = document.getElementsByTagName('div')[0];
+		div.onclick = function () {
+			
+			div.style.backgroundColor = "#e0e0e0";
+		}*/
+		/*var li = document.getElementsByTagName('li'),
+			len = li.length;
+		for (var i = 0; i < len; i++) {
+			(function (i) {
+				li[i].addEventListener('click', function () {
+					console.log(i);
+				}, false);
+			} (i))
+		} */
+		var div = document.getElementsByTagName('div')[0];
+		div.onmouseenter = function () {
+			div.style.backgroundColor = "#e0e0e0";
+		}
+		div.onmouseleave = function () {
+			div.style.backgroundColor = "red";
+		}
+		div.onmousemove = function () {
+			div.style.backgroundColor = "blue";
+		}
+		div.onclick = function () {
+			div.style.backgroundColor = 'yellow';
+		}
+        </script>
+    </body>
+</html>

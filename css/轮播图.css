@@ -1,0 +1,143 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+
+#box{
+	width: 600px;
+	height: 450px;
+	margin: 300px 0 0 500px;
+	overflow: hidden;
+	border-radius: 15px;
+	position: relative;
+	-webkit-animation:myfirst 50s;
+	border: 3px solid #66b3ff;
+}
+
+#box:hover>button{
+	z-index: 2;
+	display: block;
+}
+
+#box:hover>.top{
+	z-index: 2;
+	display: block;
+}
+
+button{
+	width: 30px;
+	height: 30px;
+	outline: none;
+	display: none;
+	position: absolute;
+	color: #fff;
+	background-color: #66B3FF;
+	top: 220px;
+}
+#left{
+	border-top-right-radius: 15px; 
+	border-bottom-right-radius: 15px;
+}
+
+#right{
+	border-top-left-radius: 15px; 
+	border-bottom-left-radius: 15px;
+	text-align: center;
+	left: 570px;
+}
+
+ul{
+	width: 4800px;
+	position: relative;
+}
+
+img{
+	width: 600px;
+	height: 450px;
+	float: right;
+}
+
+.top{
+	display: none;
+	width: 70px;
+	height: 20px;
+	text-align: center;
+	font-size: 11px;
+	color: #000093;
+	background-color: #66b3ff;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	position: absolute;
+	left: 260px;
+	-moz-user-select:none;
+	cursor: default;
+	
+}
+@-webkit-keyframes myfirst  {
+	0% {border: 3px solid #66b3ff;}
+	20% {border: 3px solid yellow;}
+	40% {border: 3px solid blue;}
+	60% {border: 3px solid green;}
+    80% {border: 3px solid red;}
+    100% {border: 3px solid yellow;}
+}
+#box2{
+	width: 300px;
+	height: 50px;
+	border: 3px solid skyblue;
+	border-bottom-right-radius: 30px;
+	border-bottom-left-radius: 30px;
+	margin-left: 640px;
+	border-top: 0;
+	padding-top: 5px;
+	box-sizing: border-box;
+}
+
+span{
+	font-size: 30px;
+	color: #66b3ff;
+	float: left;
+	margin-left: 20px;
+}
+#speedPlus{
+	width: 40px;
+	height: 40px;
+	color: #00E3E3;
+	background-color: #CAFFFF;
+	margin-left: 40px;
+	border-radius: 20px;
+	float: left;
+	font-size: 26px;
+	text-align: center;
+}
+
+#speedReduce{
+	width: 40px;
+	height: 40px;
+	color: #00E3E3;
+	background-color: #CAFFFF;
+	border-radius: 20px;
+	float: left;
+	font-size: 26px;
+	text-align: center;
+	margin-left: 50px;
+
+}
+
+#subscript{
+	position: absolute;
+	left: 170px;
+	top: 410px;
+}
+
+#subscript div{
+	width: 20px;
+	height: 20px;
+	margin: 10px;
+	border: 1px solid #caffff;
+	border-radius: 15px;
+	background-color: #caffff;
+	float: left;
+}
