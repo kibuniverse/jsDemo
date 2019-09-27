@@ -3,6 +3,9 @@
 <head>
 	<title>document</title>
 	<style>
+		body {
+			position: relative;
+		}
 		.demo{
 			width: 100px;
 			height: 100px;
@@ -18,24 +21,30 @@
 	</style>
 </head>
 <body>
-	<div class="demo"></div>
+	<div class="demo" style="left: 0; top: 0;"></div>
 	<script type="text/javascript">
 	var div = document.getElementsByTagName('div')[0];
 		function drug (elem) {
 			var disX = 0;
 				disY = 0;
-			elem.addEventListener('click', function (e) {
+				isDown = false;
+			elem.addEventListener('mousedown', function (e) {
+				isDown = true;
 				disX = e.pageX - parseInt(elem.style.left);
 				disY = e.pageY - parseInt(elem.style.top);
 			 	document.addEventListener('mousemove', function (e) {
-			 		elem.style.left = e.pageX - disX + 'px';
-			 		elem.style.right = e.pageY - disY + 'px';
+			 		if(isDown){
+			 			elem.style.left = e.pageX - disX + 'px';
+			 			elem.style.top = e.pageY - disY + 'px';
+			 		}
 			 	}, false);
-
 			 	document
 			}, false);
+			elem.addEventListener('mouseup', function() {
+				isDown = false;
+				return;
+			}, false);
 		}
-
 	drug(div);
 
 	</script>

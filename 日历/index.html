@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#box {
+			width: 640px;
+			margin: auto;
+		}
+
+		ul {
+			list-style: none;
+		}
+		ul li {
+			width: 85px;
+		    height: 45px;
+		    font-size: 40px;
+		    float: left;
+		    text-align: center;
+		    line-height: 45px;
+		    font-weight: 800;
+		}
+		#datebox span {
+			width: 85px;
+			height: 45px;
+			float: left;
+			text-align: center;
+			line-height: 45px;
+			font-size: 20px;
+			font-weight: 400;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li>日</li>
+			<li>一</li>
+			<li>二</li>
+			<li>三</li>
+			<li>四</li>
+			<li>五</li>
+			<li>六</li>
+		</ul>
+		<div id='datebox'>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var datebox = document.getElementById('datebox');
+		var date = new Date();
+		console.log(date);
+		var nextDay = 1;
+		//获取每个月有多少天
+		function getEndDay(year, month) {
+			return new Date(year, month, 0).getDate();		
+		}
+		//获取每月的第一天是周几
+		function getWeek(year, month) {
+			return new Date(year, month - 1, 1).getDay() + 1;
+		}
+
+		//获取上个月最后一天
+		var lastEndDay = getEndDay(date.getFullYear(), date.getMonth());
+		var week = getWeek(date.getFullYear(), date.getMonth());
+		var daynum = getEndDay(date.getFullYear(), date.getMonth() + 1);
+
+		var str = '';
+		for(let i = 0; i < 42; i ++){
+			if(i <= week) {
+				str = '<span style="color: #ccc;">'+(lastEndDay--)+'</span>' + str;
+			}else if(i > week + daynum) {
+				str += '<span style="color: #ccc;">'+ (nextDay++) +'</span>';
+			}else {
+				var s = '';
+				if(i - week == date.getDate()){
+					str += '<span style="color: #000; background: #e0e0e0;" >'+(i - week)+'</span>';
+				}
+				else{
+					str += '<span style="color: #000;" >'+(i - week)+'</span>';
+				}
+			}
+		}
+		console.log(str);
+		datebox.innerHTML = str;
+		</script>
+
+</body>
+</html>		
