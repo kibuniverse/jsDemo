@@ -1,4 +1,4 @@
-// 得到屏幕的宽告
+// 得到屏幕的宽高
 var Height = document.documentElement.clientHeight - 60;
 var Width = document.documentElement.clientWidth - 200;
 
@@ -169,11 +169,11 @@ dataObject.onreadystatechange = function () {
 		} 	
 	}
 }
+
 url = 'https://www.konghouy.cn/job/all';
 
 dataObject.open('get', url, false);	
 
-dataObject.setRequestHeader('Authorization','B96085E470276CC36548A7AB1773AE35')
 
 dataObject.send(null);
 
