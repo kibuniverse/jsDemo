@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    position: relative;
+    transform-style: preserve-3d;
+    background: black;
+    background: url(imgs/backgroundimg.gif);
+    /*background-size: 100% 100%;*/
+}
+#box {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+}
+button {
+    outline: none;
+	font-size: 20px;
+	border: 0;
+}
+
+.nameTag {
+    width: 200px;
+    height: 60px;
+    top: -80px;
+    background-color: #000;
+    position: absolute;
+    text-align: center;
+    -webkit-transition: all  2s;
+    box-shadow: 2px 3px 5px #5cadad;
+    opacity: 0;
+    border: 1px solid #5cadad;
+    transform: scale(1);
+}
+.namechoice {
+    width: 300px;
+    height: 120px;
+    top: -80px;
+    background-color: #000;
+    position: absolute;
+    text-align: center;
+    -webkit-transition: all 2s;
+    box-shadow: 2px 3px 5px #5cadad;
+    opacity: 0;
+    border: 1px solid #5cadad;
+    transform: scale(1);
+}
+
+#btnbegin {
+	width: 100px;
+	height: 50px;
+	text-align: center;
+	color: #000;
+	background: #5CADAD;
+	border-radius: 10px;
+	position: absolute;
+}
+
+#btndisorganize {
+	width: 100px;
+	height: 50px;
+	text-align: center;
+	color: #000;
+	background: #5CADAD;
+	border-radius: 10px;
+	position: absolute;
+}
+
+
+.divid{
+    color: #5cadad;
+    font-size: 30px;
+}
+
+.divName {
+    color: #5cadad;
+    font-size: 18px;
+}
+.choicedivName {
+    color: #5cadad;
+    font-size: 30px;
+}
+.choicedivid{
+    color: #5cadad;
+    font-size: 50px;
+}
+.nameTag:hover {
+    transform: translateY(-3px);
+    box-shadow: 5px 12px 5px #5cadad;
+}
+#first {
+    top: 20px;
+    left: 20px;
+}
+#box {
+    width: 300px;
+    height: 300px;
+    -webkit-perspective: 4000px;
+    left: 200px;
+    top: 100px;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: all 4s ease;
+    transform: rotateX(-20deg) rotateY(20deg);
+}
+
+.boxside {
+    width: 180px;
+    height: 180px;
+    border: 2px solid #5CADAD;
+    position: absolute;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    width: 83%;
+    height: 83%;
+    opacity: 1;
+}
+#front {
+    -webkit-transform: translate3d(0, 0, 125px);
+    /*background: url(imgs/3g.jpg);*/
+    background-size: 100% 100%;
+    transition:all 1s; ease
+}
+#leftside {
+    -webkit-transform: rotateY(-90deg) translate3d(0, 0, 125px);
+    /*background: url(imgs/web.jpg);*/
+    background-size: 100% 100%;
+    transition:all .5s ease;
+}
+#rightside {
+    -webkit-transform: rotateY(90deg) translate3d(0, 0, 125px);
+    /*background: url(imgs/ios.png);*/
+    background-size: 100% 100%;
+    transition:all .5s ease;
+}
+#back {
+    -webkit-transform: rotateY(180deg) translate3d(0, 0, 125px);
+    /*background: url(imgs/PM.jpg);*/
+    background-size: 100% 100%;
+    transition:all .5s ease;
+    position: absolute;
+}
+#top {
+    transform: rotateX(90deg) translate3d(0, 0, 125px);
+    /*background: url(imgs/后台.jpg);*/
+    background-size: 100% 100%;
+    transition:all .5s ease;
+
+}
+#bottom {
+    transform: rotateX(-90deg) translate3d(0, 0, 125px);
+    /*background: url(imgs/web.jpg);*/
+    background-size: 100% 100%;
+    transition:all .5s ease;
+}
+
