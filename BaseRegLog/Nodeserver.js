@@ -4,7 +4,7 @@ var mysql = require('mysql');
 //连接数据库
 var connection = mysql.createConnection({
     host: 'localhost',
-    //进入那个数据库
+    //进入哪个数据库
     database: 'mysql',
     user: 'root',
     password: 'yankaizhi123',
@@ -27,15 +27,15 @@ server.use('*', function(req, res, next) {
 server.get('/register', function(req, res) {
     var findRe = getSelectSql('mydata', req.query['user']);
     console.log(findRe);
-    connection.query(findRe, (err, result) => {
-        if (err) {
+    Query(connection, findRe, 
+        function() {
             res.send({
                 ok: false,
                 way: 'register',
                 msg: '数据库错误'
             });
             res.end();
-        } else { // 查找成功则说明该用户名已经存在
+        }, function() {
             console.log(result);
             if (result.length == 0) {
                 let sql = "INSERT INTO mydata SET ?";
@@ -44,19 +44,26 @@ server.get('/register', function(req, res) {
                     name: req.query['user'],
                     password: req.query['pass']
                 };
-                connection.query(sql, post, (err, result) => {
-                    if (err) {
+                Query(connection, sql, 
+                    // sql语句错误执行的回调函数
+                    function() {
                         console.log(err);
-                    } else {
+                        res.send({
+                            ok: false,
+                            way: 'register',
+                            msg: '数据库错误'
+                        });
+                        res.end();
+                    }, function () {
+                        // 插入成功
                         console.log('注册成功');
                         res.send({
                             ok: true,
                             way: 'register',
                             msg: '注册成功'
                         });
-                         res.end();
-                    }
-                }); // 
+                        res.end();
+                    });
                 //insert
             } else {
                 res.send({
@@ -66,9 +73,7 @@ server.get('/register', function(req, res) {
                 });
                 res.end();
             }
-        }
-       
-    });
+        });
 });
 // 登陆的函数
 server.get('/login', function(req, res) {
