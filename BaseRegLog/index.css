@@ -1,0 +1,71 @@
+* {
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+}
+
+body, html {
+	background: #f7f7f7;
+}
+
+#box {
+	width: 400px;
+	height: 600px;
+	background: #fff;
+	margin: auto;
+	margin-top: 70px;
+}
+
+#form {
+	width: 320px;
+	height: 400px;
+	margin: auto;
+}
+
+input, button {
+	outline: none;
+}
+#user {
+	width: 320px;
+	height: 40px;
+	border-bottom: 2px solid #CBC5BF;
+	margin-top: 50px;
+	margin-left: 30px;
+}
+
+#pass {
+	width: 320px;
+	height: 40px;
+	border: none;
+	margin-top: 50px;	
+	margin-left: 30px;
+	border-bottom: 2px solid #CBC5BF;
+}
+
+#user:active {
+	border-bottom: 2px solid #6A6AFF;
+}
+
+#pass:active {
+	border-bottom: 2px solid #6A6AFF;
+}
+
+#lr_box {
+	width: 300px;
+	height: 200px;
+	margin: 70px auto;
+	padding-left: 30px;
+	padding-right: 30px;
+	box-sizing: border-box;
+}
+#login{
+	width: 100px;
+	height: 40px;
+	float: left;
+}
+
+#register {
+	width: 100px;
+	height: 40px;
+	float: right;
+}
