@@ -32,11 +32,9 @@ server.get('/register', function(req, res) {
         res.send({ok: false, way: 'register', msg: '该用户已存在'});
         res.end();
     } else {
-        console.log('income1');
         console.log(sql);
         //  自己封装的Query
         Query(connection, sql, function() {
-            console.log('ok');
             res.send({ok: false, way: 'register',msg: '数据库错误'});
             res.end(); 
             // 插入数据
@@ -50,7 +48,6 @@ server.get('/register', function(req, res) {
                 connection.query(sql, post, (err, result) => {
                     if(err) {
                         console.log(err);
-                        console.log('ok1');
                         res.send({ok: false,way: 'register',msg: '数据库错误'});
                         res.end();
                     } else {
