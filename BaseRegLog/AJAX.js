@@ -2,6 +2,7 @@ var user = document.getElementById('user');
 var pass = document.getElementById('pass');
 var reg_btn = document.getElementById('register');
 var login_btn = document.getElementById('login');
+var tip = document.getElementById('tip'); 
 
 user.oninput = function() {
 	if(!formatCheck(regname, user.value)) {
@@ -54,7 +55,6 @@ var regpass = /[a-zA-Z0-9]{6,16}/;
 
 // 发送ajax请求
 function sendAjax(type) {
-	
     if (formatCheck(regname, user.value) && formatCheck(regpass, pass.value)) {
         var url = 'http://localhost:1912/' + type + '?user=' + user.value + '&pass=' + pass.value;
         xhr.open('get', url, false);
@@ -62,8 +62,10 @@ function sendAjax(type) {
     } else {
         if (!formatCheck(regname, user.value)) {
             user.style.borderBottom = '2px solid red';
+            tip.style.opacity = 1;
         } else {
             pass.style.borderBottom = '2px solid red';
+            tip.style.opacity = 1;
         }
     }
 }
@@ -81,3 +83,11 @@ function formatCheck(reg, str) {
     if (reg.test(str)) return true;
     return false;
 }
+
+user.addEventListener('click', () => {
+	tip.style.opacity = 0;
+}, false);
+
+pass.addEventListener('click', () => {
+	tip.style.opacity = 0;
+}, false);

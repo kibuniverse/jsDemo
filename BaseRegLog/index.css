@@ -49,13 +49,17 @@ input, button {
 #pass:active {
 	border-bottom: 2px solid #6A6AFF;
 }
+#tip {
+	width: 177px;
+	margin: 80px auto 0 auto;
+	color: red;
+	opacity: 0;
+}
 
 #lr_box {
 	width: 300px;
-	height: 200px;
-	margin: 70px auto;
-	padding-left: 30px;
-	padding-right: 30px;
+	height: 50px;
+	margin: 10px auto;
 	box-sizing: border-box;
 }
 #login{
