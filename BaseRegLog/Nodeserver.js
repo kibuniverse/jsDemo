@@ -35,6 +35,7 @@ server.get('/register', function(req, res) {
         console.log(sql);
         //  自己封装的Query
         Query(connection, sql, function() {
+            console.log('ok');
             res.send({ok: false, way: 'register',msg: '数据库错误'});
             res.end(); 
             // 插入数据
