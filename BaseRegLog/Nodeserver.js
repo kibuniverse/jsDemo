@@ -28,6 +28,10 @@ server.get('/register', function(req, res) {
     // 判断该用户名是否存在
     // 函数内部return promise对象 
     isExist(connection, sql, 'register').then(function() {
+        console.log('income');
+        res.send({ok: false, way: 'register', msg: '该用户已存在'});
+        res.end();
+    }, function() {
         console.log(sql);
         //  自己封装的Query
         Query(connection, sql, function() {
@@ -56,10 +60,6 @@ server.get('/register', function(req, res) {
                 });
                 //insert
         });
-    }, function() {
-        console.log('income');
-        res.send({ok: false, way: 'register', msg: '该用户已存在'});
-        res.end();
     });
     
 });
