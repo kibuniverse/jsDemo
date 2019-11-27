@@ -7,8 +7,7 @@ var connection = mysql.createConnection({
     //进入哪个数据库
     database: 'mysql',
     user: 'root',
-    password: 'yankaizhi123',
-    dataStrings: true
+    password: 'yankaizhi123'
 });
 connection.connect(function(err) {
     if (err) {
@@ -27,11 +26,8 @@ server.use('*', function(req, res, next) {
 server.get('/register', function(req, res) {
     var sql = getSelectSql('mydata', req.query['user']);
     // 判断该用户名是否存在
-    if( isExist(connection, sql, 'register') ) {
-        console.log('income');
-        res.send({ok: false, way: 'register', msg: '该用户已存在'});
-        res.end();
-    } else {
+    // 函数内部return promise对象 
+    isExist(connection, sql, 'register').then(function() {
         console.log(sql);
         //  自己封装的Query
         Query(connection, sql, function() {
@@ -60,18 +56,22 @@ server.get('/register', function(req, res) {
                 });
                 //insert
         });
-    }
+    }, function() {
+        console.log('income');
+        res.send({ok: false, way: 'register', msg: '该用户已存在'});
+        res.end();
+    });
     
 });
 // 登陆的函数
 server.get('/login', function(req, res) {
     let sql = getSelectSql('mydata', req.query['user']);
     // 判断该用户名是否存在
-    if(isExist(connection, sql, 'login') == false) {
-        res.send({ok: false, way: 'login', msg: '该用户不存在'});
-        res.end();
+    // 
 
-    } else {
+
+    isExist(connection, sql, 'login').then(function() {
+        // 查询成功
         Query(connection, sql, function() {
         res.send({
             ok: false,
@@ -96,7 +96,12 @@ server.get('/login', function(req, res) {
         }
         res.end();
     });
-    }
+    },function() {
+        // 查询失败
+        res.send({ok: false, way: 'login', msg: '该用户不存在'});
+        res.end();
+    });
+
     
 });
 // 监听端口
@@ -106,6 +111,7 @@ function getSelectSql(table, name) {
     var sql = 'SELECT * FROM ' + table + ' WHERE name=\'' + name + '\'';
     return sql;
 }
+
 /*
  * obj --> 需要执行的query的对象
  * sql --> sql语句
@@ -129,27 +135,32 @@ function Query(obj, sql, errFun, correctFun) {
  */
 
 function isExist(obj, sql, ways) {
-    // 因为是异步执行 所以将返回值以回调函数方式去执行
-    return obj.query(sql, (err, result) => {
-        if(err) {
-            //sql 语句错误
-            res.send({
-                ok: false,
-                way: ways,
-                msg: '数据库错误'
+    
+
+    return new Promise(
+        function(resolve, reject) {
+            obj.query(sql, (err, result) => {
+                if(err) {
+                    //sql 语句错误
+                    res.send({
+                        ok: false,
+                        way: ways,
+                        msg: '数据库错误'
+                    });
+                    res.end();
+                    reject();
+                } else {
+                    console.log(result);
+                    // 未查询到 --> return 0
+                    if(result.length == 0) {
+                        console.log('该用户不存在');
+                        reject();
+                    // 查询到了 --> return 1
+                    } else {
+                        console.log('该用户存在');
+                        resolve();
+                    }  
+                }
             });
-            res.end();
-        } else {
-            console.log(result);
-            // 未查询到 --> return 0
-            if(result.length == 0) {
-                console.log('该用户不存在');
-                return false;
-            // 查询到了 --> return 1
-            } else {
-                console.log('该用户存在');
-                return true;
-            }  
-        }
-    });
+        })
 }
