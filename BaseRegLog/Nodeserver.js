@@ -9,6 +9,8 @@ var connection = mysql.createConnection({
     user: 'root',
     password: 'yankaizhi123'
 });
+
+
 connection.connect(function(err) {
     if (err) {
         console.log(err);
@@ -17,6 +19,8 @@ connection.connect(function(err) {
         console.log('与MySQL数据库建立连接成功。');
     }
 });
+
+
 //解决跨域问题， 即统配所有的域
 server.use('*', function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'null');
@@ -27,11 +31,12 @@ server.get('/register', function(req, res) {
     var sql = getSelectSql('mydata', req.query['user']);
     // 判断该用户名是否存在
     // 函数内部return promise对象 
+
     isExist(connection, sql, 'register').then(function() {
-        console.log('income');
         res.send({ok: false, way: 'register', msg: '该用户已存在'});
         res.end();
-    }, function() {
+    })
+    .catch(function() {
         console.log(sql);
         //  自己封装的Query
         Query(connection, sql, function() {
@@ -68,35 +73,21 @@ server.get('/login', function(req, res) {
     let sql = getSelectSql('mydata', req.query['user']);
     // 判断该用户名是否存在
     // 
-
-
     isExist(connection, sql, 'login').then(function() {
-        // 查询成功
         Query(connection, sql, function() {
-        res.send({
-            ok: false,
-            way: 'login',
-            msg: '数据库错误'
+            res.send({ ok: false, way: 'login', msg: '数据库错误'});
+            res.end();
+        }, function(result) {
+             // 密码匹配
+            if (result[0].password == req.query['pass']) {
+                res.send({ok: true,way: 'login',msg: '登陆成功'});
+            } else {
+                res.send({ ok: false, way: 'login', msg: '密码错误'});
+            }
+            res.end();
         });
-        res.end();
-    }, function(result) {
-        // 密码匹配
-        if (result[0].password == req.query['pass']) {
-            res.send({
-                ok: true,
-                way: 'login',
-                msg: '登陆成功'
-            });
-        } else {
-            res.send({
-                ok: false,
-                way: 'login',
-                msg: '密码错误'
-            });
-        }
-        res.end();
-    });
-    },function() {
+    })
+    .catch(function() {
         // 查询失败
         res.send({ok: false, way: 'login', msg: '该用户不存在'});
         res.end();
