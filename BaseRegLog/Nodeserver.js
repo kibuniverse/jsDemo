@@ -144,7 +144,7 @@ function isExist(obj, sql, ways) {
                     console.log(result);
                     // 未查询到 --> return 0
                     if(result.length == 0) {
-                        console.log('该用户不存在');
+                        console.log('账号或密码错误');
                         reject();
                     // 查询到了 --> return 1
                     } else {
