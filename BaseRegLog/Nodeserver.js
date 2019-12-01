@@ -38,7 +38,7 @@ server.get('/register', function(req, res) {
     })
     .catch(function() {
         console.log(sql);
-        //  自己封装的Query
+        //  发送请求
         Query(connection, sql, function() {
             console.log('ok');
             res.send({ok: false, way: 'register',msg: '数据库错误'});
@@ -71,13 +71,14 @@ server.get('/register', function(req, res) {
 // 登陆的函数
 server.get('/login', function(req, res) {
     let sql = getSelectSql('mydata', req.query['user']);
+
     // 判断该用户名是否存在
-    // 
     isExist(connection, sql, 'login').then(function() {
         Query(connection, sql, function() {
             res.send({ ok: false, way: 'login', msg: '数据库错误'});
             res.end();
         }, function(result) {
+            
              // 密码匹配
             if (result[0].password == req.query['pass']) {
                 res.send({ok: true,way: 'login',msg: '登陆成功'});
