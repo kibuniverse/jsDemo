@@ -24,6 +24,7 @@ pass.oninput = function() {
 
 //创建 XMLHttpRequest对象
 var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
 xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
         if ((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
@@ -31,19 +32,23 @@ xhr.onreadystatechange = function() {
             // 判断
             if (json.way == 'register') {
                 if (json.ok) {
-                    alert('注册成功!');
+                    alert('登出成功');
                     location.reload();
                 } else {
                     alert('注册失败: ' + json.msg);
                 }
-            } else { // µÇÂ½
+            } else if(json.way == 'login'){ // µÇÂ½
                 if (json.ok) {
-                    alert('登陆成功¦');
-                    location.reload();
+                    window.location.href = 'skip_page.html';
                 } else {
                     alert('登陆失败: ' + json.msg);
                 }
-
+            } else if(json.way == 'auto_login') {
+                if(json.ok) {
+                    window.location.href = 'skip_page.html';
+                } else {
+                    user.style.borderBottom = '2px solid #CBC5BF';
+                }
             }
         }
     }
@@ -55,7 +60,7 @@ var regpass = /[a-zA-Z0-9]{6,16}/;
 
 // 发送ajax请求
 function sendAjax(type) {
-    if (formatCheck(regname, user.value) && formatCheck(regpass, pass.value)) {
+    if (formatCheck(regname, user.value) && formatCheck(regpass, pass.value) || type == 'auto_login') {
         var url = 'http://localhost:1912/' + type + '?user=' + user.value + '&pass=' + pass.value;
         xhr.open('get', url, false);
         xhr.send(null);
@@ -91,3 +96,12 @@ user.addEventListener('click', () => {
 pass.addEventListener('click', () => {
 	tip.style.opacity = 0;
 }, false);
+
+document.onkeydown = function(e) {
+    if(e.which == 13){
+        sendAjax('login');
+    }
+}
+window.onload = function () {
+    sendAjax('auto_login');
+}

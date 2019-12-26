@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+
+		#box {
+			width: 200px;
+			margin: 20px auto;
+			text-align: center;
+			padding: 10px 20px 20px 20px;
+			background: #5b52520d;
+		}
+
+		.block {
+			margin: 100px 0 50px 0; 
+		}
+		#tip {
+			font-size: 20px;
+		}
+
+		#logout {
+			width: 200px;
+			height: 40px;
+			border-radius: 15px;
+			outline: none;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="box">
+		<div id='tip' class="block">欢迎您</div>
+		<div id='user_name' class="block"></div>
+		<button id='logout' class="block">登出</button>
+	</div>
+	
+	<script type="text/javascript">
+		var xhr_page = new XMLHttpRequest();
+		 xhr_page.withCredentials = true;
+		xhr_page.onreadystatechange = function() {
+		    if (xhr_page.readyState == 4) {
+		        if ((xhr_page.status >= 200 && xhr_page.status <= 300) || xhr_page.status == 304) {
+		        	let json = JSON.parse(xhr_page.responseText);
+		        	if(json.way == 'logout') {
+		        		setTimeout(()=> {
+			        		window.location.href = 'index.html';
+			        	}, 500);
+		        	}
+		        	
+		            if(json.way == 'get_name') {
+		            	if(json.ok) {
+		            		document.getElementById('user_name').innerHTML = json.name;
+		            	}
+		            }
+		           	// console.log(xhr_page);
+		        }
+		    }
+		}
+		function sendAjax(type) {
+	        var url = 'http://localhost:1912/' + type + '?user=' + 'yankaizhi2' + '&pass=' + 'yankaizhi2';
+	        xhr_page.open('get', url, false);
+	        xhr_page.send();
+		}
+		document.getElementById('logout').addEventListener('click', function() {
+			sendAjax('logout');
+		}, false);
+
+		window.onload = function() {
+			sendAjax('get_name');
+		}
+	</script>
+</body>
+</html>

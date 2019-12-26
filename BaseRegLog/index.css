@@ -25,6 +25,7 @@ body, html {
 input, button {
 	outline: none;
 }
+
 #user {
 	width: 320px;
 	height: 40px;
